@@ -1,0 +1,100 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8" />#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>#}
+{#  <title>Available Internships</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>#}
+{#  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>#}
+{#  <style>#}
+{#    body {#}
+{#      background: linear-gradient(135deg, #667eea, #764ba2);#}
+{#      min-height: 100vh;#}
+{#      font-family: 'Segoe UI', sans-serif;#}
+{#      padding: 40px;#}
+{#    }#}
+{#    .table-container {#}
+{#      background: rgba(255, 255, 255, 0.1);#}
+{#      backdrop-filter: blur(14px);#}
+{#      border-radius: 20px;#}
+{#      padding: 30px;#}
+{#      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);#}
+{#      color: #fff;#}
+{#    }#}
+{#    table.dataTable thead th {#}
+{#      color: #fff;#}
+{#    }#}
+{#    .dataTables_filter input {#}
+{#      background-color: rgba(255, 255, 255, 0.9);#}
+{#      border-radius: 30px;#}
+{#      border: none;#}
+{#      padding: 8px 12px;#}
+{#    }#}
+{#    .btn-apply {#}
+{#      border-radius: 20px;#}
+{#      padding: 5px 15px;#}
+{#      font-size: 0.9rem;#}
+{#      font-weight: 600;#}
+{#    }#}
+{#  </style>#}
+{#</head>#}
+{#<body>#}
+{% extends 'user/newindex.html' %}
+{% block body %}
+  <div class="container table-container">
+    <h2 class="text-center mb-4">Available Internships</h2>
+    <div class="table-responsive">
+      <table id="internshipTable" class="table table-striped table-hover text-white align-middle">
+        <thead>
+          <tr>
+            <th>Sl No</th>
+              <th>Internship Name</th>
+            <th>Company Name</th>
+            <th>Title</th>
+            <th>Description</th>
+              <th>Internship Status</th>
+            <th>Type</th>
+            <th>Apply</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Data -->
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+              <td>{{ i.name }}</td>
+            <td>{{ i.cname }}</td>
+            <td>{{ i.title }}</td>
+{#              <td>hjsjhgskshghgvshgsvhgsv</td>#}
+            <td>{{ i.description }}</td>
+              <td>{{ i.i_status }}</td>
+            <td>{{ i.type }}</td>
+            <td>{% if i.rstatus == "yes" %}Already Applied{% else %}
+              <a href="/myapp/u_apply/{{ i.id }}" style="color: white;" class="btn btn-success">Apply</a>{% endif %}
+            </td>
+          </tr>
+         {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  {% for k in messages %}
+  {{ k }}
+  {% endfor %}
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#internshipTable').DataTable({
+        pageLength: 5,
+        lengthMenu: [5, 10, 20],
+      });
+    });
+  </script>
+{% endblock %}
+{#</body>#}
+{#</html>#}

@@ -1,0 +1,125 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8" />#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1" />#}
+{#  <title>Submit Daily Report</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />#}
+{#  <style>#}
+{#    body {#}
+{#      background: #f0f4f8;#}
+{#      font-family: 'Segoe UI', sans-serif;#}
+{#      padding: 30px;#}
+{#    }#}
+{#    .container {#}
+{#      max-width: 600px;#}
+{#      background: #fff;#}
+{#      padding: 30px;#}
+{#      border-radius: 12px;#}
+{#      box-shadow: 0 8px 24px rgba(0,0,0,0.1);#}
+{#    }#}
+{#    h1 {#}
+{#      margin-bottom: 25px;#}
+{#      font-weight: 600;#}
+{#      text-align: center;#}
+{#    }#}
+{#    label {#}
+{#      font-weight: 500;#}
+{#    }#}
+{#    textarea.form-control {#}
+{#      min-height: 150px;#}
+{#      resize: vertical;#}
+{#    }#}
+{#    .btn-submit {#}
+{#      background-color: #5a67d8;#}
+{#      border: none;#}
+{#      padding: 12px;#}
+{#      width: 100%;#}
+{#      font-weight: 600;#}
+{#      font-size: 1.1rem;#}
+{#      border-radius: 30px;#}
+{#      color: white;#}
+{#      transition: background-color 0.3s ease;#}
+{#    }#}
+{#    .btn-submit:hover {#}
+{#      background-color: #434190;#}
+{#    }#}
+{#  </style>#}
+{#</head>#}
+{#<body>#}
+{% extends 'user/newindex.html' %}
+{% block body %}
+  <div class="container">
+    <h1>Submit Daily Report</h1>
+
+    <form action="/myapp/u_edit_task_post/" method="post" >
+        {% csrf_token %}
+
+
+        <input type="hidden" name="id" value="{{ id }}">
+{#      <div class="mb-3">#}
+{#        <label for="reportId" class="form-label">Report ID</label>#}
+{#        <input type="text" class="form-control" id="reportId" name="reportId" placeholder="Enter Report ID" required />#}
+{#        <div class="invalid-feedback">Please enter Report ID.</div>#}
+{#      </div>#}
+
+{#      <div class="mb-3">#}
+{#        <label for="studentId" class="form-label">Student ID</label>#}
+{#        <input type="text" class="form-control" id="studentId" name="studentId" placeholder="Enter Student ID" required />#}
+{#        <div class="invalid-feedback">Please enter Student ID.</div>#}
+{#      </div>#}
+{##}
+      <div class="mb-3">
+        <label for="internshipId" class="form-label">Title</label>
+        <input type="text" class="form-control" id="internshipId" name="title" placeholder="Enter Title" required />
+        <div class="invalid-feedback"></div>
+      </div>
+
+{#      <div class="mb-3">#}
+{#        <label for="reportDate" class="form-label">Report Date</label>#}
+{#        <input type="date" class="form-control" id="reportDate" name="reportDate" required />#}
+{#        <div class="invalid-feedback">Please select the report date.</div>#}
+{#      </div>#}
+
+      <div class="mb-3">
+        <label for="content" class="form-label">Report Content</label>
+        <textarea
+          class="form-control"
+          id="content"
+          name="content"
+          placeholder="Write your daily report here..."
+          required
+          minlength="10"
+          maxlength="2000"
+        ></textarea>
+        <div class="invalid-feedback">
+          Please enter your report content (at least 10 characters).
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-submit">Submit Report</button>
+    </form>
+  </div>
+
+{#  <script>#}
+{#    (() => {#}
+{#      'use strict';#}
+{#      const form = document.getElementById('dailyReportForm');#}
+{##}
+{#      form.addEventListener('submit', (event) => {#}
+{#        if (!form.checkValidity()) {#}
+{#          event.preventDefault();#}
+{#          event.stopPropagation();#}
+{#        } else {#}
+{#          event.preventDefault();#}
+{#          alert('Daily report submitted successfully!');#}
+{#          form.reset();#}
+{#        }#}
+{#        form.classList.add('was-validated');#}
+{#      });#}
+{#    })();#}
+{#  </script>#}
+{% endblock %}
+{#</body>#}
+{#</html>#}
+{#<a href="/myapp/adminHome" class="btn btn-success">Home</a>#}

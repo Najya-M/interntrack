@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Company - Generate Internship Certificate</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 500;
+    }
+    .btn-submit {
+      border-radius: 30px;
+      background-color: #5a67d8;
+      border: none;
+      padding: 12px 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 20px;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .btn-submit:hover {
+      background-color: #434190;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Generate Internship Certificate</h2>
+
+    <form id="certificateForm" enctype="multipart/form-data" novalidate>
+      <div class="mb-3">
+        <label for="certificateId" class="form-label">Certificate ID</label>
+        <input type="text" class="form-control" id="certificateId" name="certificateId" placeholder="Enter Certificate ID" required />
+        <div class="invalid-feedback">Please enter Certificate ID.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="studentId" class="form-label">Student ID</label>
+        <input type="text" class="form-control" id="studentId" name="studentId" placeholder="Enter Student ID" required />
+        <div class="invalid-feedback">Please enter Student ID.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="internshipId" class="form-label">Internship ID</label>
+        <input type="text" class="form-control" id="internshipId" name="internshipId" placeholder="Enter Internship ID" required />
+        <div class="invalid-feedback">Please enter Internship ID.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="issueDate" class="form-label">Issue Date</label>
+        <input type="date" class="form-control" id="issueDate" name="issueDate" required />
+        <div class="invalid-feedback">Please select the Issue Date.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="certificateFile" class="form-label">Upload Certificate File (PDF)</label>
+        <input type="file" class="form-control" id="certificateFile" name="certificateFile" accept=".pdf" required />
+        <div class="invalid-feedback">Please upload the certificate file.</div>
+      </div>
+
+      <button type="submit" class="btn btn-submit">Generate Certificate</button>
+    </form>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const form = document.getElementById('certificateForm');
+
+      form.addEventListener('submit', (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          event.preventDefault();
+          // Here you can handle form submission, e.g., via AJAX
+          alert('Certificate generated successfully!');
+          form.reset();
+        }
+
+        form.classList.add('was-validated');
+      });
+    })();
+  </script>
+
+</body>
+</html>

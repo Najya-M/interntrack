@@ -1,0 +1,152 @@
+{% extends 'admins/index.html' %}
+{% block body %}
+{# <!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8" />#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1" />#}
+{#  <title>Admin - Generate Statistics & Reports</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />#}
+{#  <style>#}
+{#    body {#}
+{#      background: linear-gradient(135deg, #667eea, #764ba2);#}
+{#      min-height: 100vh;#}
+{#      font-family: 'Segoe UI', sans-serif;#}
+{#      padding: 40px 20px;#}
+{#      color: #fff;#}
+{#    }#}
+{#    .container {#}
+{#      max-width: 900px;#}
+{#      background: rgba(255, 255, 255, 0.1);#}
+{#      backdrop-filter: blur(14px);#}
+{#      border-radius: 20px;#}
+{#      padding: 30px 40px;#}
+{#      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);#}
+{#    }#}
+{#    h2 {#}
+{#      font-weight: 600;#}
+{#      margin-bottom: 30px;#}
+{#      text-align: center;#}
+{#    }#}
+{#    label {#}
+{#      font-weight: 500;#}
+{#    }#}
+{#    select, input[type="date"] {#}
+{#      border-radius: 30px;#}
+{#      padding: 10px 18px;#}
+{#      border: none;#}
+{#      font-size: 1rem;#}
+{#      width: 100%;#}
+{#      background-color: rgba(255, 255, 255, 0.9);#}
+{#      color: #000;#}
+{#      transition: box-shadow 0.3s ease;#}
+{#    }#}
+{#    select:focus, input[type="date"]:focus {#}
+{#      outline: none;#}
+{#      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.6);#}
+{#    }#}
+{#    .btn-generate {#}
+{#      border-radius: 30px;#}
+{#      background-color: #5a67d8;#}
+{#      border: none;#}
+{#      padding: 12px 0;#}
+{#      font-weight: 600;#}
+{#      font-size: 1.1rem;#}
+{#      width: 100%;#}
+{#      margin-top: 20px;#}
+{#      transition: background-color 0.3s ease;#}
+{#      color: white;#}
+{#    }#}
+{#    .btn-generate:hover {#}
+{#      background-color: #434190;#}
+{#    }#}
+{#    #reportResult {#}
+{#      margin-top: 40px;#}
+{#      min-height: 200px;#}
+{#      background-color: rgba(255, 255, 255, 0.15);#}
+{#      border-radius: 15px;#}
+{#      padding: 20px;#}
+{#      color: #fff;#}
+{#      font-size: 1rem;#}
+{#      overflow-y: auto;#}
+{#    }#}
+{#  </style>#}
+{#</head>#}
+{#<body>#}
+
+  <div class="container">
+    <h2>Generate Statistics</h2>
+
+    <form id="reportForm" novalidate>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" name="startDate" required />
+        </div>
+        <div class="col-md-6">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" name="endDate" required />
+        </div>
+        <div class="col-md-12">
+          <label for="reportType">Report Type</label>
+          <select id="reportType" name="reportType" required>
+            <option value="" disabled selected>Select report type</option>
+            <option value="applications">Applications</option>
+            <option value="internships">Internships</option>
+            <option value="companies">Companies</option>
+            <option value="students">Students</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-generate">Generate Report</button>
+    </form>
+
+    <div id="reportResult">
+      <!-- Report data will appear here -->
+{#      <p class="text-center">Select date range and report type, then click "Generate Report".</p>#}
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('reportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const startDate = this.startDate.value;
+      const endDate = this.endDate.value;
+      const reportType = this.reportType.value;
+
+      const resultDiv = document.getElementById('reportResult');
+
+      // Simple validation
+      if (!startDate || !endDate || !reportType) {
+        resultDiv.innerHTML = '<p class="text-danger text-center">Please fill all fields correctly.</p>';
+        return;
+      }
+      if (startDate > endDate) {
+        resultDiv.innerHTML = '<p class="text-danger text-center">Start Date cannot be after End Date.</p>';
+        return;
+      }
+
+      // Placeholder: you can replace this with real AJAX call to fetch report data
+      resultDiv.innerHTML = `<p class="text-center">Generating <strong>${reportType}</strong> report from <strong>${startDate}</strong> to <strong>${endDate}</strong>...</p>`;
+
+      // Simulate loading and report generation delay
+      setTimeout(() => {
+        resultDiv.innerHTML = `
+          <h4 class="text-center">Report: ${reportType.charAt(0).toUpperCase() + reportType.slice(1)}</h4>
+          <p><strong>Date Range:</strong> ${startDate} to ${endDate}</p>
+          <p>This is a placeholder for the ${reportType} report content.</p>
+          <ul>
+            <li>Total count: 123</li>
+            <li>Active: 100</li>
+            <li>Inactive: 23</li>
+          </ul>
+        `;
+      }, 1500);
+    });
+  </script>
+
+{#</body>#}
+{#</html>#}
+{% endblock %}

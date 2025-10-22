@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Student Applications</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+    }
+    .table-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      color: #fff;
+    }
+{#    table.dataTable thead th {#}
+{#      color: #fff;#}
+{#    }#}
+    .dataTables_filter input {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      border: none;
+      padding: 8px 12px;
+    }
+    select.status-select {
+      border-radius: 20px;
+      padding: 5px;
+      font-size: 0.85rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container table-container">
+    <h2 class="text-center mb-4">Manage Student Applications</h2>
+    <div class="table-responsive">
+      <table id="applicationsTable" class="table table-striped table-hover  align-middle">
+        <thead>
+          <tr style="color: white;background-color: #0b0b0b" >
+            <th>Serial No</th>
+              <th>Applied Date</th>
+            <th>Student ID</th>
+            <th>Internship ID</th>
+            <th>status</th>
+{#            <th>Action</th>#}
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example Data -->
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter}}</td>
+            <td>{{ i.applied_date}}</td>
+            <td>{{ i.STUDENT.name }}</td>
+              <td>{{ i.INTERNSHIP.title }}</td>
+
+    <td>{% if i.status == "pending" %}
+                <a href="/myapp/c_approved_applicationGet/{{ i.id }}" class="btn btn-success">Approve</a>
+            <a href="/myapp/c_rejected_applicationGet/{{ i.id }}" class="btn btn-danger">Reject</a>
+        {% elif i.status == "approved" %}
+        <a href="/myapp/c_add_task/{{ i.id }}" class="btn btn-success">Task</a>
+{#            <a href="/myapp//{{ i.id }}" class="btn btn-danger">View Task</a>#}
+        {% else %}
+        {{ i.status }}
+    {% endif %}</td>
+
+
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#applicationsTable').DataTable({
+        pageLength: 5,
+        lengthMenu: [5, 10, 20],
+      });
+
+      // Handle status change (you can send to backend here)
+      $('.status-select').on('change', function () {
+        const applicationId = $(this).closest('tr').find('td:first').text();
+        const newStatus = $(this).val();
+        alert(`Status for ${applicationId} changed to ${newStatus}`);
+        // TODO: Send AJAX request to backend to save status
+      });
+    });
+  </script>
+</body>
+</html>

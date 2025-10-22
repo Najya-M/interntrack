@@ -1,0 +1,65 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8" />#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1" />#}
+{#  <title>My Internship Certificates</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />#}
+{#  <style>#}
+{#    body {#}
+{#      background: #eef2f7;#}
+{#      font-family: 'Segoe UI', sans-serif;#}
+{#      padding: 30px;#}
+{#    }#}
+{#    h1 {#}
+{#      margin-bottom: 30px;#}
+{#      text-align: center;#}
+{#      font-weight: 600;#}
+{#    }#}
+{#    .table thead {#}
+{#      background-color: #343a40;#}
+{#      color: white;#}
+{#    }#}
+{#    .download-link {#}
+{#      color: #0d6efd;#}
+{#      text-decoration: none;#}
+{#      font-weight: 500;#}
+{#    }#}
+{#    .download-link:hover {#}
+{#      text-decoration: underline;#}
+{#    }#}
+{#  </style>#}
+{#</head>#}
+{#<body>#}
+{% extends 'user/newindex.html' %}
+{% block body %}
+
+  <div class="container">
+    <h1>My Internship Certificates</h1>
+
+    <table class="table table-bordered table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Certificate ID</th>
+          <th>Student ID</th>
+          <th>Internship ID</th>
+          <th>Issue Date</th>
+          <th>Certificate File</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+{#              <a href="/certificates/CERT001.pdf" class="download-link" target="_blank" rel="noopener noreferrer">Download</a>#}
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+{#</body>#}
+{#</html>#}
